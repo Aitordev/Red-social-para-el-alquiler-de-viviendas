@@ -88,6 +88,14 @@ session_start();
 	                  <h3>Llevo viviendo 20 años debajo de un puente, pero gracias al wifi del McDonald's y esta red social puedo imaginarme que vivo en una casa de verdad.</h3>
 	                 	<h5><tgr>USNAVY RODRIGUES</tgr></h5>
 	                </div>
+									<div class="item">
+	                  <h3>Desde caída de CCCP muchos compatrriotas abandonamos madrre patrria, grracias a web de casas volvemos a creer que comunismo ser posible, ademas de poder comparrtir rrecetas de компот y квас, на здоровье Тобольск!</h3>
+	                 	<h5><tgr>Верный</tgr></h5>
+	                </div>
+									<div class="item">
+	                  <h3>me ha salvado la vida esa pagina web, estaria en la calle desde que mi madre se fue con su novio por ahi y me dijo que me fuera al hostal de mi abuela, pero es una bruja y no soporto la vida ahi.</h3>
+	                 	<h5><tgr>MENDIOLO BUENA PERSONA</tgr></h5>
+	                </div>
 	              </div>
 	            </div><!--/Carousel-->
 
