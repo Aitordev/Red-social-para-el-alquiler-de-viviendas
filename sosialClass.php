@@ -97,20 +97,51 @@
       $jsonData .= ']}';
       return $jsonData;
     }
-    public static function login($user,$pass,$factory){
+    public static function login($email,$pass){
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT user, pass, admin, factory FROM users WHERE user = ? AND pass = ? AND factory = ?");
-      $statement->bind_param( 'sss', $user,$pass,$factory);
+      $statement = $db_connection->prepare( "SELECT username FROM users WHERE email = ? AND pass = ? ");
+      $statement->bind_param( 'ss', $email,$pass);
       $statement->execute();
-      $statement->bind_result($username, $password, $admin, $floor);
+      $statement->bind_result($username);
       $line = new stdClass;
       if ($statement->fetch()) {
         $line->username = $username;
-        $line->password = $password;
-        $line->admin = $admin;
-        $line->floor = $floor;
       }
+      $statement->close();
+      $db_connection->close();
+      return $line;
+    }
+    public static function register($email,$nick,$name,$pass,$pass2){
+      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
+      $db_connection->query( "SET NAMES 'UTF8'" );
+      $statement = $db_connection->prepare( "SELECT email FROM users WHERE email = ? ");
+      $statement->bind_param( 's', $email);
+      $statement->execute();
+      $statement->bind_result($mail);
+      $line = new stdClass;
+      if ($statement->fetch()) {
+        $line->ok = 3;
+        $statement->close();
+        $db_connection->close();
+        return $line;
+      }
+      $statement->close();
+      $statement = $db_connection->prepare( "SELECT username FROM users WHERE username = ? ");
+      $statement->bind_param( 's', $nick);
+      $statement->execute();
+      $statement->bind_result($username);
+      if ($statement->fetch()) {
+        $line->ok = 2;
+        $statement->close();
+        $db_connection->close();
+        return $line;
+      }
+      $statement->close();
+      $statement = $db_connection->prepare( "INSERT INTO users( email, username, name, pass) VALUES(?, ?, ?, ?)");
+      $statement->bind_param( 'ssss',$email, $nick, $name, $pass);
+      $statement->execute();
+      $line->ok = 1;
       $statement->close();
       $db_connection->close();
       return $line;

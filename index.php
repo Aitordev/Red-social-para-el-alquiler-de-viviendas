@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+session_start();
+?>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -16,8 +18,25 @@
 	      <div class="logo">Red social Viviendas</div>
 	      <div class="container">
 	        <div class="row">
-						<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
-						<button id="registerB" class="btn btn-conf-2 btn-green">Registro</button>
+						<?php if(!isset($_SESSION[ 'username' ]) || ($_SESSION["username"] == "")){?>
+							<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
+							<button id="registerB" class="btn btn-conf-2 btn-green">Registro</button>
+						<?php } else {?>
+							<div class="menu dropdown">
+								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">
+									<div class="userItem">
+										<img class="circle-button" src="img/placeholder.png" draggable="false"/>
+										<div class = "username"><?php echo $_SESSION[ 'username' ]; ?></div>
+									</div>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a id="admin" href="#"><i class="glyphicon glyphicon-map-marker"></i>Administrar Viviendas</a></li>
+									<li><a id="settings" href="#"><i class="glyphicon glyphicon-cog"></i>Configuracion</a></li>
+									<li class="divider"></li>
+									<li><a id="logout" href="#"><i class="glyphicon glyphicon-log-out"></i>Cerrar Sesion</a></li>
+								</ul>
+							</div>
+						<?php } ?>
 	          <div class="col-md-8 col-md-offset-2 centered">
 	            <h1>Bienvenido a Red social Viviendas.</h1>
 	            <div class="mtb">
@@ -105,8 +124,8 @@
 						<input name="email" type="email" placeholder="example1@mail.com" required autofocus>
 						<input name="nick" type="text" placeholder="Nick" required autofocus>
 						<input name="name" type="text" placeholder="Nombre y apellidos" required autofocus>
-						<input name="pass" type="password" placeholder="Contraseña" required autofocus>
-						<input name="pass" type="password" placeholder="Repite Contraseña" required autofocus>
+						<input name="pass" type="password" placeholder="Contraseña" id="password" required autofocus>
+						<input name="pass2" type="password" placeholder="Repite Contraseña" id="confirm_password" required autofocus>
 						<input class='btn btn-conf btn-green' type="submit" value="Aceptar">
 					</form>
 			</div>

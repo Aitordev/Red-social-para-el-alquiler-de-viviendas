@@ -3,11 +3,12 @@
 	require_once("config.php");
 	require_once("sosialClass.php");
 	echo '<script language="javascript">';
+	$location = "index.php";
 	//login DB
 	$email = strip_tags($_POST['email']);
 	$pass = md5(strip_tags($_POST['pass']));
-	$data = chatClass::login($email,$pass);
-	if (isset($data->username) && $user == $data->username){
+	$data = sosialClass::login($email,$pass);
+	if (isset($data->username)){
 	   $_SESSION['username'] = $data->username;
 	}
 	else{

@@ -316,3 +316,51 @@ input {
 #modal-background.active, .modal-content.active {
     display: block;
 }
+.menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 50px;
+    background: rgba(27,35,42,0.9);
+    z-index: 100;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.username {
+		display: inline-block;
+		padding: 0 0 0 5px;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 26px;
+		letter-spacing: 1px;
+		color: #c1c1c1;
+}
+.circle-button {
+		display: inline-block;
+		margin-top: -2px;
+		width: 35px;
+		height: 35px;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.userItem {
+		cursor: pointer;
+		margin-top: 10px;
+		margin-right: -80%;
+		padding-right: 15px;
+		margin-bottom: 12px;
+}
+
+.glyphicon{
+		margin-right: 5px;
+}
