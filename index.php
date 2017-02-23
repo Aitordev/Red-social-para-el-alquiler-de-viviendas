@@ -38,9 +38,9 @@ session_start();
 							</div>
 						<?php } ?>
 	          <div class="col-md-8 col-md-offset-2 centered">
-	            <h1>Bienvenido a Red social Viviendas.</h1>
+	            <h1 id="title">Bienvenido a Red social Viviendas.</h1>
 	            <div class="mtb">
-	              <form role="form" action="search.php" method="post" enctype="plain">
+	              <form role="form" id="search">
 									<input type="text" name="place" class="subscribe-input" placeholder="Poblacion" required>
 									<input type="text" name="street" class="subscribe-input" placeholder="Calle (opcional)" >
 									<input type="text" name="number" class="subscribe-input" placeholder="Numero (opcional)" >
@@ -89,12 +89,12 @@ session_start();
 	                 	<h5><tgr>USNAVY RODRIGUES</tgr></h5>
 	                </div>
 									<div class="item">
-	                  <h3>Desde caída de CCCP muchos compatrriotas abandonamos madrre patrria, grracias a web de casas volvemos a creer que comunismo ser posible, ademas de poder comparrtir rrecetas de компот y квас, на здоровье Тобольск!</h3>
-	                 	<h5><tgr>Верный</tgr></h5>
+	                  <h3>Llevo viviendo 20 años debajo de un puente, pero gracias al wifi del McDonald's y esta red social puedo imaginarme que vivo en una casa de verdad.</h3>
+	                 	<h5><tgr>USNAVY RODRIGUES</tgr></h5>
 	                </div>
 									<div class="item">
 	                  <h3>me ha salvado la vida esa pagina web, estaria en la calle desde que mi madre se fue con su novio por ahi y me dijo que me fuera al hostal de mi abuela, pero es una bruja y no soporto la vida ahi.</h3>
-	                 	<h5><tgr>MENDIOLO BUENA PERSONA</tgr></h5>
+	                 	<h5><tgr>MENDIOLO </tgr></h5>
 	                </div>
 	              </div>
 	            </div><!--/Carousel-->

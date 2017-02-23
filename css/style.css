@@ -364,3 +364,13 @@ input {
 .glyphicon{
 		margin-right: 5px;
 }
+
+.resize#h{
+		padding: 30px;
+}
+.resize{
+		font-size: 12px;
+}
+.nodisplay{
+	display: none;
+}

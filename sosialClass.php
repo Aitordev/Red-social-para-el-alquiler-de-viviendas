@@ -46,7 +46,7 @@
       $db_connection->close();
     }
 
-    public static function getSearchOf($info) {
+    public static function getSearchOf($place, $street, $number) {
       $arr = array();
       $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
@@ -64,31 +64,6 @@
         $line->color = $color;
         $line->chattime = date('H:i', strtotime($chattime));
         $line->chatdate = date('d M Y', strtotime($chattime));
-        $arr[] = json_encode($line);
-      }
-      $statement->close();
-      $db_connection->close();
-      $jsonData .= implode(",", $arr);
-      $jsonData .= ']}';
-      return $jsonData;
-    }
-
-    public static function getPastChat($session) {
-      $arr = array();
-      $jsonData = '{"results":[';
-      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
-      $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT username, admin, chattext, chattime, color FROM messages WHERE session = ?");
-      $statement->bind_param( 's', $session);
-      $statement->execute();
-      $statement->bind_result($username, $admin, $chattext, $chattime, $color);
-      $line = new stdClass;
-      while ($statement->fetch()) {
-        $line->username = $username;
-        $line->chattext = $chattext;
-        $line->admin = $admin;
-        $line->color = $color;
-        $line->chattime = date('H:i', strtotime($chattime));
         $arr[] = json_encode($line);
       }
       $statement->close();
