@@ -7,6 +7,7 @@ session_start();
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Red social Viviendas</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/cards.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -21,8 +22,19 @@ session_start();
 						<?php if(!isset($_SESSION[ 'username' ]) || ($_SESSION["username"] == "")){?>
 							<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
 							<button id="registerB" class="btn btn-conf-2 btn-green">Registro</button>
+							<div id ="menu" class="menu dropdown nodisplay">
+								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">
+									<div class="userItem">
+										<img class="circle-button" src="img/placeholder.png" draggable="false"/>
+									</div>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a id="loginL" href="#"><i class="glyphicon glyphicon-log-in"></i>Login</a></li>
+									<li><a id="registerL" href="#"><i class="glyphicon glyphicon-piggy-bank"></i>Registra</a></li>
+								</ul>
+							</div>
 						<?php } else {?>
-							<div class="menu dropdown">
+							<div id = "menu" class="menu dropdown">
 								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">
 									<div class="userItem">
 										<img class="circle-button" src="img/placeholder.png" draggable="false"/>
@@ -47,7 +59,7 @@ session_start();
 	                <button class='btn btn-conf btn-green' type="submit">Buscar</button>
 	              </form>
 	            </div><!--/mt-->
-	            <h6>TOTALMENTE GRATIS.</h6>
+	            <h6 id ="free">TOTALMENTE GRATIS.</h6>
 	          </div>
 	        </div><!--/row-->
 	      </div><!--/container-->

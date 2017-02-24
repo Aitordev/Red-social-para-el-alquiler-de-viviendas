@@ -364,13 +364,38 @@ input {
 .glyphicon{
 		margin-right: 5px;
 }
-
 .resize#h{
-		padding: 30px;
+		min-height: 70%;
+		padding-top: 0;
+		background: white;
 }
-.resize{
+.resize {
+		transition: display 2s ease;
+		-webkit-transition: display 2s ease;
+		-moz-transition: display 2s ease;
+		-o-transition: display 2s ease;
+}
+.resize input{
 		font-size: 12px;
+		width: inherit;
+		padding: 5px 0px 5px 10px;
+		min-height: 0;
 }
+.resize .btn-conf{
+		font-size: 8px;
+		padding: 5px 10px 5px 10px;
+		line-height: 20px;
+}
+.resize #search{
+	position: fixed;
+	top: 8px;
+	left: 20%;
+	z-index: 1000;
+}
+
 .nodisplay{
 	display: none;
+}
+.card__author{
+	color:#666;
 }

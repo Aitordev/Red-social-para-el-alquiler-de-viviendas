@@ -23,10 +23,10 @@ $(document).ready(function() {
     }
     $("#modal-background").toggleClass("active");
   });
-  $("#registerB").click(function () {
+  $("#registerB, #registerL").click(function () {
     $("#register, #modal-background").toggleClass("active");
   });
-  $("#loginB").click(function () {
+  $("#loginB, #loginL").click(function () {
       $("#login, #modal-background").toggleClass("active");
   });
   $("#logout").click(function () {
@@ -65,7 +65,36 @@ $(document).ready(function() {
       // Log a message to the console
         console.log("Hooray, it worked! "+response);
         $( "#h" ).addClass("resize");
-        $( "#title" ).addClass("nodisplay");
+        $( ".logo, #title, #free, #loginB, #registerB, #sep, #green" ).addClass("nodisplay");
+        $( "#menu" ).removeClass("nodisplay");
+        var html= '<div class="cards">'
+            + '<article class="card card_size-m">'
+            +    '<header class="card__header">'
+            +      '<img class="card__preview" src="https://i.ytimg.com/vi/qvK5M2W2TRU/maxresdefault.jpg" alt="Preview img">'
+            +    '</header>'
+            +      '<div class="card__body">'
+            +         '<div class="card__content">'
+            +         '<h3 class="card__title"><a href="#0" class="card__showmore">Casa moderna y sosegada</a></h3>'
+            +         '<div class="card__description">'
+            +           '<p>Madrid, 28080</p>'
+            +         '</div>'
+            +      '</div>'
+            +      '<footer class="card__footer">'
+            +         '<span class="card__author">Alquilado</span>'
+            +         '<div class="card__meta">'
+            +           '<div class="card__meta-item">'
+            +             '<i class="card__meta-icon card__meta-likes"></i>'
+            +             '<i class="card__meta-icon card__meta-likes"></i>'
+            +             '<i class="card__meta-icon card__meta-likes"></i>'
+            +             '<i class="card__meta-icon card__meta-likes"></i>'
+            +           '</div>'
+            +         '</div>'
+            +       '</footer>'
+            +     '</div>'
+            + '</article>'
+            +'</div>';
+
+        $("#h").append(html);
       });
       // Callback handler that will be called on failure
       request.fail(function (jqXHR, textStatus, errorThrown){
