@@ -10,10 +10,10 @@ $(document).ready(function() {
       confirm_password.setCustomValidity('');
     }
   }
-
-  password.onchange = validatePassword;
-  confirm_password.onkeyup = validatePassword;
-
+  if (password !== null && confirm_password !== null){
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  }
   $("#modal-background").click(function () {
     if ($("#login").hasClass("active")){
       $("#login").toggleClass("active");
@@ -28,6 +28,12 @@ $(document).ready(function() {
   });
   $("#loginB, #loginL").click(function () {
       $("#login, #modal-background").toggleClass("active");
+  });
+  $("#admin").click(function () {
+      window.location.href= "admin.php";
+  });
+  $("#search").click(function () {
+      window.location.href= "index.php";
   });
   $("#logout").click(function () {
     $.ajax({
@@ -110,6 +116,5 @@ $(document).ready(function() {
           // Reenable the inputs
       $inputs.prop("disabled", false);
       });
-
   });
 });

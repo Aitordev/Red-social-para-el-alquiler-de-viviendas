@@ -72,6 +72,28 @@
       $jsonData .= ']}';
       return $jsonData;
     }
+    public static function getUserSearch($user) {
+      $arr = array();
+      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
+      $db_connection->query( "SET NAMES 'UTF8'" );
+      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter FROM houses WHERE owner = ? OR renter = ?");
+      $statement->bind_param( 'ss', $user, $user);
+      $statement->execute();
+      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter);
+      $line = new stdClass;
+      while ($statement->fetch()) {
+        $line->id = $id;
+        $line->name = $name;
+        $line->description = $description;
+        $line->place = $place;
+        $line->street = $street;
+        $line->owner = $owner;
+        $line->renter = $renter;
+      }
+      $statement->close();
+      $db_connection->close();
+      return $line;
+    }
     public static function login($email,$pass){
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );

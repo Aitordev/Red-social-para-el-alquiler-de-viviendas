@@ -399,3 +399,18 @@ input {
 .card__author{
 	color:#666;
 }
+
+.adminmenu {
+	position: absolute;
+	background: #000000;
+}
+
+.adminmenu .userItem{
+	position: absolute;
+	right: 0;
+	margin-right: 0;
+}
+
+.paddingtop15 {
+	padding-top: 15px;
+}
