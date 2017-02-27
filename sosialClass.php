@@ -36,11 +36,11 @@
       return $jsonData;
     }
 
-    public static function setChatLines( $chattext, $username,$color,$admin,$session,$notification) {
+    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter) {
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "INSERT INTO messages( username, chattext, admin, color, session, notification) VALUES(?, ?, ?, ?, ?, ?)");
-      $statement->bind_param( 'ssissi', $username, $chattext, $admin, $color,$session,$notification);
+      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter) VALUES(?, ?, ?, ?, ?, ?, ?)");
+      $statement->bind_param( 'sssssss', $name,$description,$place,$street,$number,$owner,$renter);
       $statement->execute();
       $statement->close();
       $db_connection->close();

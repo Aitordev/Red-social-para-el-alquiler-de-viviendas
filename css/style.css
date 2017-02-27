@@ -414,3 +414,17 @@ input {
 .paddingtop15 {
 	padding-top: 15px;
 }
+
+.admin input[type="text"] {
+    width: 100%;
+}
+.admin input[type="radio"] {
+    min-height: 0;
+}
+.admin .btn{
+  	margin-top: 20px;
+}
+.admin .radio-inline{
+	font-weight: 700;
+	margin-bottom: 10px;
+}

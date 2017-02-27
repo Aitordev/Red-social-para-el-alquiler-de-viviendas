@@ -117,4 +117,21 @@ $(document).ready(function() {
       $inputs.prop("disabled", false);
       });
   });
+
+  //admin window
+  $("#housesB").click(function () {
+      $("#houses").removeClass("nodisplay");
+      $("#new").addClass("nodisplay");
+      $("#sol").addClass("nodisplay");
+  });
+  $("#newB").click(function () {
+      $("#new").removeClass("nodisplay");
+      $("#houses").addClass("nodisplay");
+      $("#sol").addClass("nodisplay");
+  });
+  $("#solB").click(function () {
+      $("#sol").removeClass("nodisplay");
+      $("#new").addClass("nodisplay");
+      $("#houses").addClass("nodisplay");
+  });
 });
