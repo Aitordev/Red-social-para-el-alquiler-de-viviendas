@@ -18,6 +18,60 @@ USE `sosial`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `houses`
+--
+
+DROP TABLE IF EXISTS `houses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `houses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `place` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `street` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `owner` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `renter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `houses`
+--
+
+LOCK TABLES `houses` WRITE;
+/*!40000 ALTER TABLE `houses` DISABLE KEYS */;
+INSERT INTO `houses` VALUES (1,'casa','csasa','cscasas','csasa','csascas','a',''),(2,'dgf','dgfgdf','dgfdgf','dgfgdf','gdfdgf','','a'),(3,'aitor','dfg','dfg','dfg','gdfg','','a'),(4,'dfgdf','gfdgdf','dgfdfg','gfdgdf','gfddfg','','a'),(5,'wer','qweqwe','qweqwe','qweqwe','weqweqw','','a'),(6,'fjhfgj','fgjfgj','fgjfgj','fgjfgj','fgjfgj','','a'),(7,'fjhfgj','fgjfgj','fgjfgj','fgjfgj','fgjfgj','','a'),(8,'yui','yuiy','uiyu','yuiy','yui','','a');
+/*!40000 ALTER TABLE `houses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_history`
+--
+
+DROP TABLE IF EXISTS `user_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_history` (
+  `iduser` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `points` int(11) NOT NULL,
+  PRIMARY KEY (`iduser`),
+  CONSTRAINT `user` FOREIGN KEY (`iduser`) REFERENCES `users` (`email`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_history`
+--
+
+LOCK TABLES `user_history` WRITE;
+/*!40000 ALTER TABLE `user_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `users`
 --
 
@@ -30,8 +84,18 @@ CREATE TABLE `users` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `pass` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('a@a.com','a','a a','202cb962ac59075b964b07152d234b70'),('asd','asd','asd','asd'),('b@b.com','b','b b ','202cb962ac59075b964b07152d234b70');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -42,4 +106,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-22 12:28:12
+-- Dump completed on 2017-02-28  9:12:15
