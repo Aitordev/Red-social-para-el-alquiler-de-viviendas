@@ -36,11 +36,11 @@
       return $jsonData;
     }
 
-    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter) {
+    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter,$houseFolder) {
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter) VALUES(?, ?, ?, ?, ?, ?, ?)");
-      $statement->bind_param( 'sssssss', $name,$description,$place,$street,$number,$owner,$renter);
+      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter, house_folder) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+      $statement->bind_param( 'ssssssss', $name,$description,$place,$street,$number,$owner,$renter,$houseFolder);
       $statement->execute();
       $statement->close();
       $db_connection->close();

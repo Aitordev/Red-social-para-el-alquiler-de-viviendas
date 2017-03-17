@@ -428,3 +428,14 @@ input {
 	font-weight: 700;
 	margin-bottom: 10px;
 }
+
+#gallery .thumbnail{
+	width:150px;
+	height: 150px;
+  float:left;
+  margin:2px;
+}
+#gallery .thumbnail img{
+  width:150px;
+  height: 150px;
+}

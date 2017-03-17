@@ -134,4 +134,33 @@ $(document).ready(function() {
       $("#new").addClass("nodisplay");
       $("#houses").addClass("nodisplay");
   });
+
+  var uploadfiles = document.querySelector('#fileinput');
+  uploadfiles.addEventListener('change', function () {
+      var files = this.files;
+      var galleryId = "gallery";
+      var gallery = document.getElementById(galleryId);
+      gallery.innerHTML = "";
+      for(var i=0; i<files.length; i++){
+          previewImage(this.files[i],gallery);
+      }
+  }, false);
+
+  function previewImage(file,gallery) {
+    var thumb = document.createElement("div");
+    thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+    var img = document.createElement("img");
+    img.file = file;
+    thumb.appendChild(img);
+    gallery.appendChild(thumb);
+
+    // Using FileReader to display the image content
+    var reader = new FileReader();
+    reader.onload = (function(aImg) {
+       return function(e) {
+          aImg.src = e.target.result; 
+        };
+    })(img);
+    reader.readAsDataURL(file);
+  }
 });

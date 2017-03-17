@@ -23,7 +23,6 @@ else{
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/retina.min.js"></script>
-	<script src="js/dropzone.js"></script>
 	<script src="js/main.js"></script>
 </head>
 <body>
@@ -69,7 +68,7 @@ else{
 									</div>
 									<div id = "new" class="col-lg-12 paddingtop15 nodisplay">
 											<h1>Nueva Casa</h1>
-											<form method="post" action="addHouse.php" id="my-awesome-dropzone" class="admin dropzone">
+											<form method="post" action="addHouse.php" class="admin" enctype="multipart/form-data">
 												<input name="name" type="text" placeholder="Nombre de la casa" required autofocus>
 												<input name="description" type="text" placeholder="Descripcion (opcional)" autofocus>
 												<input name="place" type="text" placeholder="Lugar" required autofocus>
@@ -78,9 +77,10 @@ else{
 												<legend>¿Quien eres?</legend>
 											  <label class="radio-inline"><input type="radio" name="user" value="0"/>Dueño</label>
 											  <label class="radio-inline"><input type="radio" name="user" value="1"/>Inquilino</label>
-												<legend>Añade imagenes:</legend>
-												<div class="dropzone-previews"></div>
-												<input class='btn btn-conf btn-green pull-right' type="submit" value="Aceptar">
+												<legend>Añade imagenes: (puedes seleccionar varias)</legend>
+												<input type="file" name="files[]" accept="image/*" id="fileinput" multiple="multiple" required autofocus>
+												<div id="gallery"></div>
+												<input class='btn btn-conf btn-green pull-right' type="submit" name="submit" value="Aceptar">
 											</form>
 									</div>
 									<div id = "sol" class="col-lg-12 paddingtop15 nodisplay">
@@ -94,43 +94,6 @@ else{
 	<!-- /#wrapper -->
 </body>
 </html>
-<script language="javascript">
-Dropzone.options.myAwesomeDropzone = { // The camelized version of the ID of the form element
-// The configuration we've talked about above
-//autoProcessQueue: false,
-//uploadMultiple: true,
-//parallelUploads: 100,
-addRemoveLinks: true,
-acceptedFiles: "image/*",
-maxFiles: 5,
-// The setting up of the dropzone
-//init: function() {
-	//var myDropzone = this;
-	// First change the button to actually tell Dropzone to process the queue.
-	//this.element.querySelector("input[type=submit]").addEventListener("click", function(e) {
-		// Make sure that the form isn't actually being sent.
-
-		//e.preventDefault();
-		//e.stopPropagation();
-		//myDropzone.processQueue();
-	//});
-	// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
-	// of the sending event because uploadMultiple is set to true.
-	//this.on("sendingmultiple", function() {
-		// Gets triggered when the form is actually being sent.
-		// Hide the success button or the complete form.
-	//});
-	//this.on("successmultiple", function(files, response) {
-		// Gets triggered when the files have successfully been sent.
-		// Redirect user or notify of success.
-	//});
-	//this.on("errormultiple", function(files, response) {
-		// Gets triggered when there was an error sending the files.
-		// Maybe show form again, and notify user of error
-	//});
-//}
-};
-</script>
 
 <!--
 REQUISITOS

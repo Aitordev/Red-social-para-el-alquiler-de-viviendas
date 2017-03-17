@@ -33,8 +33,9 @@ CREATE TABLE `houses` (
   `number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `owner` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `renter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `house_folder` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +44,6 @@ CREATE TABLE `houses` (
 
 LOCK TABLES `houses` WRITE;
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
-INSERT INTO `houses` VALUES (1,'casa','csasa','cscasas','csasa','csascas','a',''),(2,'dgf','dgfgdf','dgfdgf','dgfgdf','gdfdgf','','a'),(3,'aitor','dfg','dfg','dfg','gdfg','','a'),(4,'dfgdf','gfdgdf','dgfdfg','gfdgdf','gfddfg','','a'),(5,'wer','qweqwe','qweqwe','qweqwe','weqweqw','','a'),(6,'fjhfgj','fgjfgj','fgjfgj','fgjfgj','fgjfgj','','a'),(7,'fjhfgj','fgjfgj','fgjfgj','fgjfgj','fgjfgj','','a'),(8,'yui','yuiy','uiyu','yuiy','yui','','a');
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -106,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-02-28  9:12:15
+-- Dump completed on 2017-03-17 13:37:03
