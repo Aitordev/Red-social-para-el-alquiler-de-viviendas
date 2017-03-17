@@ -33,7 +33,7 @@ $(document).ready(function() {
       window.location.href= "admin.php";
   });
   $("#search").click(function () {
-      window.location.href= "index.php";
+      //window.location.href= "index.php";
   });
   $("#logout").click(function () {
     $.ajax({
@@ -136,7 +136,8 @@ $(document).ready(function() {
   });
 
   var uploadfiles = document.querySelector('#fileinput');
-  uploadfiles.addEventListener('change', function () {
+  if (null !== uploadfiles){
+    uploadfiles.addEventListener('change', function () {
       var files = this.files;
       var galleryId = "gallery";
       var gallery = document.getElementById(galleryId);
@@ -144,8 +145,8 @@ $(document).ready(function() {
       for(var i=0; i<files.length; i++){
           previewImage(this.files[i],gallery);
       }
-  }, false);
-
+    }, false);
+  }
   function previewImage(file,gallery) {
     var thumb = document.createElement("div");
     thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
@@ -158,7 +159,7 @@ $(document).ready(function() {
     var reader = new FileReader();
     reader.onload = (function(aImg) {
        return function(e) {
-          aImg.src = e.target.result; 
+          aImg.src = e.target.result;
         };
     })(img);
     reader.readAsDataURL(file);

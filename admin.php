@@ -18,7 +18,6 @@ else{
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/cards.css" rel="stylesheet">
 	<link href="css/simple-sidebar.css" rel="stylesheet">
-	<link href="css/dropzone.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -65,6 +64,9 @@ else{
 								</div>
 									<div id = "houses" class="col-lg-12 paddingtop15">
 											<h1>Mis Viviendas</h1>
+											<div id = "userHouses">
+												<img src="img/load.gif" class="img-fluid">
+											</div>
 									</div>
 									<div id = "new" class="col-lg-12 paddingtop15 nodisplay">
 											<h1>Nueva Casa</h1>
