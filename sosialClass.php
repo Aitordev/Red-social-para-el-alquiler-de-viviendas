@@ -2,45 +2,24 @@
 
   class sosialClass
   {
-    public static function getRestChatLines($id,$me,$session)
-    {
-      $arr = array();
-      $jsonData = '{"results":[';
-      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
-      $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT id, username, chattext, chattime, admin, color, notification FROM messages WHERE id > ? and session=? and chattime >= DATE_SUB(NOW(), INTERVAL 1 HOUR)");
-      $statement->bind_param( 'is', $id, $session);
-      $statement->execute();
-      $statement->bind_result( $id, $username, $chattext, $chattime, $admin, $color, $notification);
-      $line = new stdClass;
-      while ($statement->fetch()) {
-        $line->id = $id;
-        $line->username = $username;
-        $line->chattext = $chattext;
-        $line->notification = $notification;
-        $line->admin = $admin;
-        $line->color = $color;
-        $line->chattime = date('H:i', strtotime($chattime));
-        if ($username == $me){
-          $line->type = 'self';
+    private static function directoryFilesArray($dir){
+      $ds= DIRECTORY_SEPARATOR;  //1
+      $storeFolder = 'houseimages';   //2
+      $targetPath = dirname( __FILE__ ) . $ds. $storeFolder. $ds . $dir . $ds;  //4
+      $dirs = [];
+      foreach (new DirectoryIterator($targetPath) as $file) {
+        if ($file->isFile()) {
+          $dirs[] = $file->getFilename();
         }
-        else{
-          $line->type = 'other';
-        }
-        $arr[] = json_encode($line);
       }
-      $statement->close();
-      $db_connection->close();
-      $jsonData .= implode(",", $arr);
-      $jsonData .= ']}';
-      return $jsonData;
+      return $dirs;
     }
 
-    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter,$houseFolder) {
+    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented) {
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter, house_folder) VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
-      $statement->bind_param( 'ssssssss', $name,$description,$place,$street,$number,$owner,$renter,$houseFolder);
+      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter, house_folder, rented) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+      $statement->bind_param( 'ssssssssi', $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented);
       $statement->execute();
       $statement->close();
       $db_connection->close();
@@ -72,14 +51,15 @@
       $jsonData .= ']}';
       return $jsonData;
     }
-    public static function getUserSearch($user) {
+    public static function getUserHouses($user) {
       $arr = array();
+      $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter FROM houses WHERE owner = ? OR renter = ?");
+      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE owner = ? OR renter = ?");
       $statement->bind_param( 'ss', $user, $user);
       $statement->execute();
-      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter);
+      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented);
       $line = new stdClass;
       while ($statement->fetch()) {
         $line->id = $id;
@@ -87,12 +67,18 @@
         $line->description = $description;
         $line->place = $place;
         $line->street = $street;
+        $line->number = $number;
         $line->owner = $owner;
         $line->renter = $renter;
+        $line->houseFolder = self::directoryFilesArray($houseFolder);
+        $line->rented = $rented;
+        $arr[] = json_encode($line);
       }
       $statement->close();
       $db_connection->close();
-      return $line;
+      $jsonData .= implode(",", $arr);
+      $jsonData .= ']}';
+      return $jsonData;
     }
     public static function login($email,$pass){
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);

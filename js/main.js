@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  var password = document.getElementById("password")
-    , confirm_password = document.getElementById("confirm_password");
-  var request;
-
   function validatePassword(){
     if(password.value != confirm_password.value) {
       confirm_password.setCustomValidity("Passwords Don't Match");
@@ -10,10 +6,110 @@ $(document).ready(function() {
       confirm_password.setCustomValidity('');
     }
   }
-  if (password !== null && confirm_password !== null){
+  function previewImage(file,gallery) {
+    var thumb = document.createElement("div");
+    thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
+    var img = document.createElement("img");
+    img.file = file;
+    thumb.appendChild(img);
+    gallery.appendChild(thumb);
+
+    // Using FileReader to display the image content
+    var reader = new FileReader();
+    reader.onload = (function(aImg) {
+       return function(e) {
+          aImg.src = e.target.result;
+        };
+    })(img);
+    reader.readAsDataURL(file);
+  }
+  function paintCardHouses(json){
+    var html= '<div class="cards">';
+    console.log(json);
+    $.each($.parseJSON(json).results, function(k, v) {
+      console.log(v.street);
+      html+='<article class="card card_size-m">'
+          +    '<header class="card__header">'
+          +      '<img class="card__preview" src="https://i.ytimg.com/vi/qvK5M2W2TRU/maxresdefault.jpg" alt="Preview img">'
+          +    '</header>'
+          +      '<div class="card__body">'
+          +         '<div class="card__content">'
+          +         '<h3 class="card__title"><a href="#0" class="card__showmore">'+ v.name +'</a></h3>'
+          +         '<div class="card__description">'
+          +           '<p>'+v.description.substr(0,21) +'...</p>'
+          +           '<p>'+v.place +'. '+ v.street+', '+ v.number +'</p>'
+          +         '</div>'
+          +      '</div>'
+          +      '<footer class="card__footer">';
+      if (1 === v.rented){
+        html+=     '<span class="card__author">Alquilado</span>';
+      }
+      else{
+        html+=     '<span class="card__author">Sin alquilar</span>';
+      }
+      html+=        '<div class="card__meta">'
+          +           '<div class="card__meta-item">'
+          +             '<i class="card__meta-icon card__meta-likes"></i>'
+          +             '<i class="card__meta-icon card__meta-likes"></i>'
+          +             '<i class="card__meta-icon card__meta-likes"></i>'
+          +             '<i class="card__meta-icon card__meta-likes"></i>'
+          +           '</div>'
+          +         '</div>'
+          +       '</footer>'
+          +     '</div>'
+          + '</article>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function searchMyHousesOnServer(){
+    var parametros = {
+      "submit" : "1"
+    };
+    $.ajax({
+      data:  parametros,
+      url:   'userHouses.php',
+      type:  'post',
+      beforeSend: function () {
+        $("#loadingHouses").removeClass("nodisplay");
+      },
+      success:  function (response) {
+        $("#loadingHouses").addClass("nodisplay");
+        $("#userHouses").html(paintCardHouses(response));
+      },
+      error: function (jqXHR, exception) {
+        $("#loadingHouses").addClass("nodisplay");
+        alert('Error.\n' + jqXHR.responseText);
+      },
+    });
+  }
+
+  var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm_password")
+    , userHouses = document.getElementById("userHouses");
+  var uploadfiles = document.querySelector('#fileinput');
+  var request;
+
+  if (null !== uploadfiles){
+    uploadfiles.addEventListener('change', function () {
+      var files = this.files;
+      var galleryId = "gallery";
+      var gallery = document.getElementById(galleryId);
+      gallery.innerHTML = "";
+      for(var i=0; i<files.length; i++){
+          previewImage(this.files[i],gallery);
+      }
+    }, false);
+  }
+
+  if (null !== password && null !== confirm_password){
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
   }
+  if (null !== userHouses){
+    searchMyHousesOnServer();
+  }
+
   $("#modal-background").click(function () {
     if ($("#login").hasClass("active")){
       $("#login").toggleClass("active");
@@ -134,34 +230,4 @@ $(document).ready(function() {
       $("#new").addClass("nodisplay");
       $("#houses").addClass("nodisplay");
   });
-
-  var uploadfiles = document.querySelector('#fileinput');
-  if (null !== uploadfiles){
-    uploadfiles.addEventListener('change', function () {
-      var files = this.files;
-      var galleryId = "gallery";
-      var gallery = document.getElementById(galleryId);
-      gallery.innerHTML = "";
-      for(var i=0; i<files.length; i++){
-          previewImage(this.files[i],gallery);
-      }
-    }, false);
-  }
-  function previewImage(file,gallery) {
-    var thumb = document.createElement("div");
-    thumb.classList.add('thumbnail'); // Add the class thumbnail to the created div
-    var img = document.createElement("img");
-    img.file = file;
-    thumb.appendChild(img);
-    gallery.appendChild(thumb);
-
-    // Using FileReader to display the image content
-    var reader = new FileReader();
-    reader.onload = (function(aImg) {
-       return function(e) {
-          aImg.src = e.target.result;
-        };
-    })(img);
-    reader.readAsDataURL(file);
-  }
 });

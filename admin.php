@@ -3,12 +3,6 @@ session_start();
 if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SESSION[ 'username' ] === ""){
 	header("Location: index.php");
 }
-else{
-	require_once("config.php");
-  require_once("sosialClass.php");
-  $user = $_SESSION[ 'username' ];
-	$data = sosialClass::getUserSearch($user);
-}
 ?>
 <html>
 <head>
@@ -65,7 +59,7 @@ else{
 									<div id = "houses" class="col-lg-12 paddingtop15">
 											<h1>Mis Viviendas</h1>
 											<div id = "userHouses">
-												<img src="img/load.gif" class="img-fluid">
+												<img id ="loadingHouses" src="img/load.gif" class="img-fluid nodisplay">
 											</div>
 									</div>
 									<div id = "new" class="col-lg-12 paddingtop15 nodisplay">
@@ -79,6 +73,7 @@ else{
 												<legend>¿Quien eres?</legend>
 											  <label class="radio-inline"><input type="radio" name="user" value="0"/>Dueño</label>
 											  <label class="radio-inline"><input type="radio" name="user" value="1"/>Inquilino</label>
+												<label class="radio-inline"><input type="checkbox" name="rented" value="rented" />Esta alquilada?</label>
 												<legend>Añade imagenes: (puedes seleccionar varias)</legend>
 												<input type="file" name="files[]" accept="image/*" id="fileinput" multiple="multiple" required autofocus>
 												<div id="gallery"></div>

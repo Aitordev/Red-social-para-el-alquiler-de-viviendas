@@ -13,6 +13,10 @@
 		$number = strip_tags($_POST['number']);
 		$owner = "";
 		$renter = "";
+		$rented = 0;
+		if(isset($_POST['rented']) &&	$_POST['rented'] == 'rented') {
+			$rented = 1;
+		}
 		//upload img
 		$ds= DIRECTORY_SEPARATOR;  //1
  		$storeFolder = 'houseimages';   //2
@@ -55,7 +59,7 @@
 				$renter = $_SESSION['username'];
 			}
 		}
-		$data = sosialClass::setNewHouse( $houseName,$description,$place,$street,$number,$owner,$renter,$houseFolder);
+		$data = sosialClass::setNewHouse( $houseName,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented);
 	}
 	echo "location.href='$location'; ";
 	echo '</script>';
