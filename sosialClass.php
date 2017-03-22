@@ -9,7 +9,7 @@
       $dirs = [];
       foreach (new DirectoryIterator($targetPath) as $file) {
         if ($file->isFile()) {
-          $dirs[] = $file->getFilename();
+          $dirs[] = $storeFolder . "\\" . $dir . "\\" .$file->getFilename();
         }
       }
       return $dirs;

@@ -57,7 +57,7 @@ p{
 .cards{
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 	font-family: "Roboto", sans-serif;
 }
 
@@ -68,6 +68,7 @@ p{
 
 	display: flex;
 	flex-direction: column;
+	margin: 4%;
 }
 
 .card_main{

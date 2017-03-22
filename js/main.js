@@ -30,7 +30,7 @@ $(document).ready(function() {
       console.log(v.street);
       html+='<article class="card card_size-m">'
           +    '<header class="card__header">'
-          +      '<img class="card__preview" src="https://i.ytimg.com/vi/qvK5M2W2TRU/maxresdefault.jpg" alt="Preview img">'
+          +      '<img class="card__preview" src="'+v.houseFolder[0]+'" alt="Preview img">'
           +    '</header>'
           +      '<div class="card__body">'
           +         '<div class="card__content">'
