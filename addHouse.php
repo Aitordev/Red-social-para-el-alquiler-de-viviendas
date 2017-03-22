@@ -45,7 +45,7 @@
     	}
       $targetPath = dirname( __FILE__ ) . $ds. $storeFolder. $ds . $houseFolder . $ds;  //4
 			if (!file_exists($targetPath)) {
-				mkdir($targetPath, 0777, true); // crea el directorio
+				mkdir($targetPath); // crea el directorio
 			}
       $targetFile =  $targetPath. sha1_file($tempFile) . "." . $ext;  //5
      	move_uploaded_file($tempFile,$targetFile); //6

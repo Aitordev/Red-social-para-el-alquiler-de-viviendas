@@ -61,6 +61,7 @@ session_start();
 	            </div><!--/mt-->
 	            <h6 id ="free">TOTALMENTE GRATIS.</h6>
 	          </div>
+	           <div id="mainHouses"></div> <!-- Cards houses div-->
 	        </div><!--/row-->
 	      </div><!--/container-->
 	    </div><!-- /H -->

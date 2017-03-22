@@ -27,7 +27,6 @@ $(document).ready(function() {
     var html= '<div class="cards">';
     console.log(json);
     $.each($.parseJSON(json).results, function(k, v) {
-      console.log(v.street);
       html+='<article class="card card_size-m">'
           +    '<header class="card__header">'
           +      '<img class="card__preview" src="'+v.houseFolder[0]+'" alt="Preview img">'
@@ -169,34 +168,8 @@ $(document).ready(function() {
         $( "#h" ).addClass("resize");
         $( ".logo, #title, #free, #loginB, #registerB, #sep, #green" ).addClass("nodisplay");
         $( "#menu" ).removeClass("nodisplay");
-        var html= '<div class="cards">'
-            + '<article class="card card_size-m">'
-            +    '<header class="card__header">'
-            +      '<img class="card__preview" src="https://i.ytimg.com/vi/qvK5M2W2TRU/maxresdefault.jpg" alt="Preview img">'
-            +    '</header>'
-            +      '<div class="card__body">'
-            +         '<div class="card__content">'
-            +         '<h3 class="card__title"><a href="#0" class="card__showmore">Casa moderna y sosegada</a></h3>'
-            +         '<div class="card__description">'
-            +           '<p>Madrid, 28080</p>'
-            +         '</div>'
-            +      '</div>'
-            +      '<footer class="card__footer">'
-            +         '<span class="card__author">Alquilado</span>'
-            +         '<div class="card__meta">'
-            +           '<div class="card__meta-item">'
-            +             '<i class="card__meta-icon card__meta-likes"></i>'
-            +             '<i class="card__meta-icon card__meta-likes"></i>'
-            +             '<i class="card__meta-icon card__meta-likes"></i>'
-            +             '<i class="card__meta-icon card__meta-likes"></i>'
-            +           '</div>'
-            +         '</div>'
-            +       '</footer>'
-            +     '</div>'
-            + '</article>'
-            +'</div>';
-
-        $("#h").append(html);
+        console.log(response);
+        $("#mainHouses").html(paintCardHouses(response));
       });
       // Callback handler that will be called on failure
       request.fail(function (jqXHR, textStatus, errorThrown){

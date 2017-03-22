@@ -30,19 +30,33 @@
       $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT username, chattext, chattime, color, session FROM messages WHERE chattext LIKE ? AND notification = 0 ORDER BY id DESC");
-      $query = '%' . $info . '%';
-      $statement->bind_param( 's', $query);
+      $str = "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE place LIKE ?";
+      if (!empty($street) || !empty($number)){
+        $str .= " AND street LIKE ? AND number = ?";
+      }
+      $statement = $db_connection->prepare($str);
+      $pl = "%".$place."%";
+      $st = "%".$street."%";
+      if (!empty($street) || !empty($number)){
+        $statement->bind_param( 'sss', $pl,$st,$number);
+      }
+      else{
+        $statement->bind_param( 's', $pl);
+      }
       $statement->execute();
-      $statement->bind_result($username, $chattext, $chattime, $color, $session);
+      $statement->bind_result($id, $name, $description, $placeR, $streetR, $numberR,$owner,$renter,$houseFolder,$rented);
       $line = new stdClass;
       while ($statement->fetch()) {
-        $line->username = $username;
-        $line->chattext = $chattext;
-        $line->session = $session;
-        $line->color = $color;
-        $line->chattime = date('H:i', strtotime($chattime));
-        $line->chatdate = date('d M Y', strtotime($chattime));
+        $line->id = $id;
+        $line->name = $name;
+        $line->description = $description;
+        $line->place = $placeR;
+        $line->street = $streetR;
+        $line->number = $numberR;
+        $line->owner = $owner;
+        $line->renter = $renter;
+        $line->houseFolder = self::directoryFilesArray($houseFolder);
+        $line->rented = $rented;
         $arr[] = json_encode($line);
       }
       $statement->close();
