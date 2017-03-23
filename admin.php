@@ -74,6 +74,7 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 											  <label class="radio-inline"><input type="radio" name="user" value="0"/>Dueño</label>
 											  <label class="radio-inline"><input type="radio" name="user" value="1"/>Inquilino</label>
 												<label class="radio-inline"><input type="checkbox" name="rented" value="rented" />Esta alquilada?</label>
+												<label id="userlist" class="radio-inline nodisplay"><input type="checkbox" name="list" value="list" />guay</label>
 												<legend>Añade imagenes: (puedes seleccionar varias)</legend>
 												<input type="file" name="files[]" accept="image/*" id="fileinput" multiple="multiple" required autofocus>
 												<div id="gallery"></div>

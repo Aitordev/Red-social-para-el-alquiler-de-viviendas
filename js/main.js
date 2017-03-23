@@ -40,11 +40,16 @@ $(document).ready(function() {
           +         '</div>'
           +      '</div>'
           +      '<footer class="card__footer">';
-      if (1 === v.rented){
-        html+=     '<span class="card__author">Alquilado</span>';
+      if ("" !== v.user){
+        if (1 === v.rented){
+          html+=     '<span class="card__author">Alquilado</span>';
+        }
+        else{
+          html+=     '<span class="card__author">Sin alquilar</span>';
+        }
       }
       else{
-        html+=     '<span class="card__author">Sin alquilar</span>';
+        html+=     '<span class="card__author"></span>';
       }
       html+=        '<div class="card__meta">'
           +           '<div class="card__meta-item">'
@@ -164,7 +169,6 @@ $(document).ready(function() {
       // Callback handler that will be called on success
       request.done(function (response, textStatus, jqXHR){
       // Log a message to the console
-        console.log("Hooray, it worked! "+response);
         $( "#h" ).addClass("resize");
         $( ".logo, #title, #free, #loginB, #registerB, #sep, #green" ).addClass("nodisplay");
         $( "#menu" ).removeClass("nodisplay");
@@ -202,5 +206,13 @@ $(document).ready(function() {
       $("#sol").removeClass("nodisplay");
       $("#new").addClass("nodisplay");
       $("#houses").addClass("nodisplay");
+  });
+  $('input[name=rented]').change(function(){
+    if($(this).is(':checked')){
+        $('#userlist').removeClass('nodisplay');
+    }
+    else{
+      $('#userlist').addClass('nodisplay');
+    }
   });
 });

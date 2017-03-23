@@ -1,72 +1,17 @@
-/*!
- * CSS Material Design Cards  (http://codepen.io/melnik909/details/JRgJXo/)
- * Copyright 2016 Stas "melnik909" Melnikov (https://stas-melnikov.ru)
- * Licensed under the MIT license
- */
-
-@media screen and (min-width: 981px){
-	html{
-		font-size: 10px;
-	}
-}
-
-@media screen and (min-width: 641px) and (max-width: 980px){
-	html{
-		font-size: 9px;
-	}
-}
-
-@media screen and (max-width: 640px){
-	html{
-		font-size: 9px;
-	}
-}
-
-body{
-	background-color: #eee;
-	font-family: "Roboto", sans-serif;
-}
-
-.container{
-	max-width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-	padding-left: 1rem;
-	padding-right: 1rem;
-}
-
-.title{
-	font-size: 3rem;
-	font-weight: 400;
-	text-align: center;
-}
-
-p{
-	line-height: 1.8;
-	margin-bottom: 2rem;
-
-	&:last-child{
-		margin-bottom : 0;
-	}
-}
-
 /*
  * Core for cards
  */
 
 .cards{
-	display: inline-grid;
-	/*display: flex;
+	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;*/
+	justify-content: center;
 	font-family: "Roboto", sans-serif;
 }
 
 .card{
-
 	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
 	margin-bottom: 2rem;
-
 	display: flex;
 	flex-direction: column;
 	margin: 4%;
@@ -120,20 +65,20 @@ p{
 }
 
 .card_size-m{
-	width: 32%;
+	width: 25%;
 }
 
 @media screen and (min-width: 481px) and (max-width: 800px){
 
 	.card_size-m, .card_size-2xl{
-		width: 49%;
+		width: 40%;
 	}
 }
 
 @media screen and (max-width: 480px){
 
 	.card_size-m, .card_size-xl, .card_size-2xl{
-		width: 100%;
+		width:85%;
 	}
 }
 

@@ -17,7 +17,7 @@ session_start();
 <body>
 	<div id="h">
 	      <div class="logo">Red social Viviendas</div>
-	      <div class="container">
+	      <div class="container-fluid">
 	        <div class="row">
 						<?php if(!isset($_SESSION[ 'username' ]) || ($_SESSION["username"] == "")){?>
 							<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
@@ -61,8 +61,8 @@ session_start();
 	            </div><!--/mt-->
 	            <h6 id ="free">TOTALMENTE GRATIS.</h6>
 	          </div>
-	           <div id="mainHouses"></div> <!-- Cards houses div-->
 	        </div><!--/row-->
+					<div id="mainHouses"></div> <!-- Cards houses div-->
 	      </div><!--/container-->
 	    </div><!-- /H -->
 

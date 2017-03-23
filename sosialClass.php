@@ -25,7 +25,7 @@
       $db_connection->close();
     }
 
-    public static function getSearchOf($place, $street, $number) {
+    public static function getSearchOf($place, $street, $number,$user) {
       $arr = array();
       $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
@@ -48,6 +48,7 @@
       $line = new stdClass;
       while ($statement->fetch()) {
         $line->id = $id;
+        $line->user = $user;
         $line->name = $name;
         $line->description = $description;
         $line->place = $placeR;
