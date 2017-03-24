@@ -23,6 +23,7 @@ session_start();
 							<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
 							<button id="registerB" class="btn btn-conf-2 btn-green">Registro</button>
 							<div id ="menu" class="menu dropdown nodisplay">
+								<a id="tittle" href="index.php"><h1>Red Social Viviendas</h1></a>
 								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">
 									<div class="userItem">
 										<img class="circle-button" src="img/placeholder.png" draggable="false"/>
@@ -30,11 +31,12 @@ session_start();
 								</a>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li><a id="loginL" href="#"><i class="glyphicon glyphicon-log-in"></i>Login</a></li>
-									<li><a id="registerL" href="#"><i class="glyphicon glyphicon-piggy-bank"></i>Registra</a></li>
+									<li><a id="registerL" href="#"><i class="glyphicon glyphicon-piggy-bank"></i>Registro</a></li>
 								</ul>
 							</div>
 						<?php } else {?>
 							<div id = "menu" class="menu dropdown">
+								<a id="tittle" href="index.php"><h1>Red Social Viviendas</h1></a>
 								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">
 									<div class="userItem">
 										<img class="circle-button" src="img/placeholder.png" draggable="false"/>
@@ -50,7 +52,7 @@ session_start();
 							</div>
 						<?php } ?>
 	          <div class="col-md-8 col-md-offset-2 centered">
-	            <h1 id="title">Bienvenido a Red social Viviendas.</h1>
+	            <h1 id="welcome">Bienvenido a Red social Viviendas.</h1>
 	            <div class="mtb">
 	              <form role="form" id="search">
 									<input type="text" name="place" class="subscribe-input" placeholder="Poblacion" required>

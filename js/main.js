@@ -33,7 +33,7 @@ $(document).ready(function() {
           +    '</header>'
           +      '<div class="card__body">'
           +         '<div class="card__content">'
-          +         '<h3 class="card__title"><a href="#0" class="card__showmore">'+ v.name +'</a></h3>'
+          +         '<h3 class="card__title"><a href="casainfo.php?id='+v.id+'"target="_blank" class="card__showmore">'+ v.name +'</a></h3>'
           +         '<div class="card__description">'
           +           '<p>'+v.description.substr(0,21) +'...</p>'
           +           '<p>'+v.place +'. '+ v.street+', '+ v.number +'</p>'
@@ -215,20 +215,4 @@ $(document).ready(function() {
       $('#userlist').addClass('nodisplay');
     }
   });
-
-  //houses window
-  var slideIndex = 0;
-  var slides = document.getElementsByClassName("mySlides");
-  if (null !== slides) showSlides();
-
-  function showSlides() {
-    var i;
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex> slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(showSlides, 2000); // Change image every 2 seconds
-  }
 });

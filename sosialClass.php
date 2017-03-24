@@ -66,6 +66,31 @@
       $jsonData .= ']}';
       return $jsonData;
     }
+    public static function getSearchId($idGet) {
+      $arr = array();
+      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
+      $db_connection->query( "SET NAMES 'UTF8'" );
+      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE id = ?");
+      $statement->bind_param( 's', $idGet);
+      $statement->execute();
+      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented);
+      $line = new stdClass;
+      while ($statement->fetch()) {
+        $line->id = $id;
+        $line->name = $name;
+        $line->description = $description;
+        $line->place = $place;
+        $line->street = $street;
+        $line->number = $number;
+        $line->owner = $owner;
+        $line->renter = $renter;
+        $line->houseFolder = self::directoryFilesArray($houseFolder);
+        $line->rented = $rented;
+      }
+      $statement->close();
+      $db_connection->close();
+      return $line;
+    }
     public static function getUserHouses($user) {
       $arr = array();
       $jsonData = '{"results":[';
