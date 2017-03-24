@@ -7,6 +7,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	font-family: "Roboto", sans-serif;
+	margin: 1.5%;
 }
 
 .card{
@@ -260,5 +261,5 @@
 }
 
 .card__meta-likes{
-	background-image: url("https://stas-melnikov.ru/cssgrid/favorite.svg");
+	background-image: url("../img/favorite.svg");
 }
