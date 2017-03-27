@@ -27,15 +27,22 @@ DROP TABLE IF EXISTS `houses`;
 CREATE TABLE `houses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(2550) CHARACTER SET utf8 DEFAULT NULL,
   `place` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `street` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `owner` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `renter` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `house_folder` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rented` int(1) NOT NULL DEFAULT '0',
+  `rooms` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bathrooms` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `squaremeters` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `floor` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `orientation` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `type` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +51,7 @@ CREATE TABLE `houses` (
 
 LOCK TABLES `houses` WRITE;
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
+INSERT INTO `houses` VALUES (3,'LA CASAA','Were larger boats and ships that were built in ancient Kalinga kingdom during the heyday of the empi','Boadilla del monte','Francisco Alonso','2','fmartinezros','','yzzlnzmy',0,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,7 +101,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('a@a.com','a','a a','202cb962ac59075b964b07152d234b70'),('asd','asd','asd','asd'),('b@b.com','b','b b ','202cb962ac59075b964b07152d234b70');
+INSERT INTO `users` VALUES ('a@a.com','a','a a','202cb962ac59075b964b07152d234b70'),('asd','asd','asd','asd'),('b@b.com','b','b b ','202cb962ac59075b964b07152d234b70'),('fmartinezros@fmartinezros.com','fmartinezros','fmartinezros','5f4dcc3b5aa765d61d8327deb882cf99');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -106,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-17 13:37:03
+-- Dump completed on 2017-03-27 13:52:40

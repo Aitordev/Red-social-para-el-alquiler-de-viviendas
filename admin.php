@@ -65,11 +65,30 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 									<div id = "new" class="col-lg-12 paddingtop15 nodisplay">
 											<h1>Nueva Casa</h1>
 											<form method="post" action="addHouse.php" class="admin" enctype="multipart/form-data">
-												<input name="name" type="text" placeholder="Nombre de la casa" required autofocus>
-												<input name="description" type="text" placeholder="Descripcion (opcional)" autofocus>
-												<input name="place" type="text" placeholder="Lugar" required autofocus>
-												<input name="street" type="text" placeholder="Calle (opcional)" autofocus>
-												<input name="number" type="text" placeholder="Numero (opcional)" autofocus>
+												<input name="name" type="text" maxlength="25" placeholder="Nombre de la casa" required autofocus>
+												<input name="rooms" type="number" maxlength="2" placeholder="Numero de habitaciones (opcional)" autofocus>
+												<input name="bathrooms" type="number" maxlength="2" placeholder="Numero de baños (opcional)" autofocus>												<input name="rooms" type="number" maxlength="2" placeholder="Numero de habitaciones (opcional)" autofocus>
+												<input name="squaremeters" type="number" maxlength="3" placeholder="Metros cuadrados (opcional)" autofocus>
+												<input name="floor" type="number" maxlength="2" placeholder="Numero de planta (opcional)" autofocus>
+												<select name="orientation" autofocus>
+													<option value="" selected="selected">Selecciona orientacion (opcional)</option>
+											    <option value="Norte">Norte</option>
+											    <option value="Sur">Sur</option>
+											    <option value="Este">Este</option>
+											    <option value="Oeste">Oeste</option>
+											  </select>
+												<select name="type" autofocus>
+													<option value="" selected="selected">Selecciona tipo de vivienda (opcional)</option>
+											    <option value="Piso">Piso</option>
+											    <option value="Chalet">Chalet</option>
+											    <option value="Duplex">Duplex</option>
+													<option value="Atico">Atico</option>
+													<option value="Estudio">Estudio</option>
+											  </select>
+												<input name="description" type="text" maxlength="100" placeholder="Descripcion (opcional)" autofocus>
+												<input name="place" type="text" placeholder="Lugar" maxlength="100"required autofocus>
+												<input name="street" type="text" placeholder="Calle (opcional)"  maxlength="100" autofocus>
+												<input name="number" type="text" placeholder="Numero (opcional)" maxlength="100" autofocus>
 												<legend>¿Quien eres?</legend>
 											  <label class="radio-inline"><input type="radio" name="user" value="0"/>Dueño</label>
 											  <label class="radio-inline"><input type="radio" name="user" value="1"/>Inquilino</label>

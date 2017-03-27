@@ -58,7 +58,7 @@ $line = sosialClass::getSearchId($id);
 						<?php } ?>
 	          <div class="col-md-8 col-md-offset-2 centered">
 							<div id ="headerHouse">
-								<h1>Casa bonita</h1>
+								<h1 id ="nameHouse"><?php echo $line->name ?></h1>
 								<div class = "subtittle">
 									<h4><i class="fa fa-bed" aria-hidden="true"></i> 2 habitaciones</h4>
 									<h4><i class="fa fa-bath" aria-hidden="true"></i> 2 baños</h4>
@@ -67,9 +67,9 @@ $line = sosialClass::getSearchId($id);
 								</div>
 							</div>
 							<div id="slides">
-								<img class="wide" src="img1.jpg">
-								<img class="wide" src="img2.jpg">
-								<img class="wide" src="img3.jpg">
+								<?php	foreach($line->houseFolder as  $clave => $img){?>
+									<img class="wide" src="<?php echo $img ?>">
+								<?php }?>
 							</div>
 							<?php if(isset($_SESSION[ 'username' ]) && ($_SESSION["username"] != "")){?>
 							<hr />
@@ -78,7 +78,7 @@ $line = sosialClass::getSearchId($id);
 									<h4>Dueño</h4>
 								</div>
 								<div class="col-md-8 text-left">
-									<p>Rafa Supremoel</p>
+									<p id="ownerHouse"><?php echo $line->owner ?></p>
 								</div>
 							</div>
 							<hr />
@@ -96,7 +96,13 @@ $line = sosialClass::getSearchId($id);
 									<h4>Estado</h4>
 								</div>
 								<div class="col-md-8 text-left">
-									<p>Alquilado</p>
+									<p id="rentedHouse">
+										<?php if (1 == $line->rented ){
+											echo 'Alquilado';
+										}else {
+											echo 'Sin alquilar';
+										} ?>
+									</p>
 								</div>
 							</div>
 							<?php } ?>
@@ -142,7 +148,7 @@ $line = sosialClass::getSearchId($id);
 									<h4>Descripción</h4>
 								</div>
 								<div class="col-md-8 text-left">
-									<p>La promoción cuenta con fantásticas vistas a Jaizkibel, Irún y la bahía de Txingudi. Es una zona estratégica con rápida conexión con la AP-8 y muy próximo al centro del municipio. Oinaurre cuenta con todos los servicios a un paso: Los edificios se caracterizan por un diseño actual donde se combina la cerámica en tono blanco y gris con el efecto cálido de la madera. Damos prioridad a la Orientación, Todas las viviendas cuentan con terrazas al Sur de diferentes superficies. Viviendas totalmente equipadas con cocina y armarios a medida. TODO INCLUIDO (vivienda, trastero, cocina, armarios y personalización)</p>
+									<p id="descriptionHouse"><?php echo $line->description ?></p>
 								</div>
 							</div>
 							<hr />
@@ -160,7 +166,7 @@ $line = sosialClass::getSearchId($id);
 									<h4>Ubicación del Inmueble</h4>
 								</div>
 								<div class="col-md-8 text-left">
-									<p id="address">Olaberria, Irun</p>
+									<p id="address"><?php echo $line->place ?>, <?php echo $line->street ?> <?php echo $line->number ?></p>
 								</div>
 								<div id="map"></div>
 							</div>
@@ -241,14 +247,6 @@ $line = sosialClass::getSearchId($id);
 			</div>
 			<script type="text/javascript">
 		    $(function() {
-					<?php if(null != $line){?>
-						fillInfo(<?php echo "'".$line->id."','".$line->name."'" ?>);
-					<?php } ?>
-					//casainfo
-				  function fillInfo(a,b){
-						console.log(a);
-						console.log(b);
-				  }
 		      $('#slides').slidesjs({
 		        width: 940,
 		        height: 328,
@@ -261,6 +259,11 @@ $line = sosialClass::getSearchId($id);
 		      });
 		    });
 				function initMap() {
+					setTimeout(function(){
+						map();
+					}, 1200);
+				}
+				function map() {
 				var geocoder = new google.maps.Geocoder();
 				var address = document.getElementById("address").innerHTML;
 				geocoder.geocode( { 'address': address}, function(results, status) {

@@ -11,8 +11,15 @@
 		$place = strip_tags($_POST['place']);
 		$street = strip_tags($_POST['description']);
 		$number = strip_tags($_POST['number']);
-		$owner = "";
+		$owner = "Sin dueño asignado";
 		$renter = "";
+		$rooms = strip_tags($_POST['rooms']);
+		$bathrooms = strip_tags($_POST['bathrooms']);
+		$squaremeters = strip_tags($_POST['squaremeters']);
+		$floor = strip_tags($_POST['floor']);
+		$orientation = strip_tags($_POST['orientation']);
+		$type = strip_tags($_POST['type']);
+
 		$rented = 0;
 		if(isset($_POST['rented']) &&	$_POST['rented'] == 'rented') {
 			$rented = 1;
@@ -20,7 +27,7 @@
 		//upload img
 		$ds= DIRECTORY_SEPARATOR;  //1
  		$storeFolder = 'houseimages';   //2
-		$houseFolder = substr( md5(rand()), 0, 7); //random name
+		$houseFolder = substr(strtolower(preg_replace('/[0-9_\/]+/','',base64_encode(sha1(substr( md5(rand()), 0, 7))))),0,10); //random name
 		$max_file_size = 1024*2000; //2000 kb
 		foreach ($_FILES['files']['name'] as $f => $name) {
 			if ($_FILES['files']['error'][$f] == 4) {
@@ -47,7 +54,7 @@
 			if (!file_exists($targetPath)) {
 				mkdir($targetPath); // crea el directorio
 			}
-      $targetFile =  $targetPath. sha1_file($tempFile) . "." . $ext;  //5
+      $targetFile =  $targetPath. substr(strtolower(preg_replace('/[0-9_\/]+/','',base64_encode(sha1($tempFile)))),0,10) . "." . $ext;  //5
      	move_uploaded_file($tempFile,$targetFile); //6
     }
 		//upload img fin
@@ -59,6 +66,7 @@
 				$renter = $_SESSION['username'];
 			}
 		}
+		echo "alert('$houseName'); ";
 		$data = sosialClass::setNewHouse( $houseName,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented);
 	}
 	echo "location.href='$location'; ";
