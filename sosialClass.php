@@ -15,11 +15,11 @@
       return $dirs;
     }
 
-    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented) {
+    public static function setNewHouse( $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras) {
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter, house_folder, rented) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-      $statement->bind_param( 'ssssssssi', $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented);
+      $statement = $db_connection->prepare( "INSERT INTO houses( name,description,place,street,number,owner,renter, house_folder, rented, rooms, bathrooms, squaremeters, floor, orientation, type, extras) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+      $statement->bind_param( 'ssssssssisssssss', $name,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras);
       $statement->execute();
       $statement->close();
       $db_connection->close();
@@ -30,7 +30,7 @@
       $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $str = "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE place LIKE ?";
+      $str = "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented, rooms, bathrooms, squaremeters, floor, orientation, type, extras FROM houses WHERE place LIKE ?";
       if (!empty($street) || !empty($number)){
         $str .= " AND street LIKE ? AND number = ?";
       }
@@ -44,7 +44,7 @@
         $statement->bind_param( 's', $pl);
       }
       $statement->execute();
-      $statement->bind_result($id, $name, $description, $placeR, $streetR, $numberR,$owner,$renter,$houseFolder,$rented);
+      $statement->bind_result($id, $name, $description, $placeR, $streetR, $numberR,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras);
       $line = new stdClass;
       while ($statement->fetch()) {
         $line->id = $id;
@@ -58,6 +58,13 @@
         $line->renter = $renter;
         $line->houseFolder = self::directoryFilesArray($houseFolder);
         $line->rented = $rented;
+        $line->rooms = $rooms;
+        $line->bathrooms = $bathrooms;
+        $line->squaremeters = $squaremeters;
+        $line->floor = $floor;
+        $line->orientation = $orientation;
+        $line->type = $type;
+        $line->extras = $extras;
         $arr[] = json_encode($line);
       }
       $statement->close();
@@ -70,10 +77,10 @@
       $arr = array();
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE id = ?");
+      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented, rooms, bathrooms, squaremeters, floor, orientation, type,extras FROM houses WHERE id = ?");
       $statement->bind_param( 's', $idGet);
       $statement->execute();
-      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented);
+      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras);
       $line = new stdClass;
       while ($statement->fetch()) {
         $line->id = $id;
@@ -86,6 +93,13 @@
         $line->renter = $renter;
         $line->houseFolder = self::directoryFilesArray($houseFolder);
         $line->rented = $rented;
+        $line->rooms = $rooms;
+        $line->bathrooms = $bathrooms;
+        $line->squaremeters = $squaremeters;
+        $line->floor = $floor;
+        $line->orientation = $orientation;
+        $line->type = $type;
+        $line->extras = $extras;
       }
       $statement->close();
       $db_connection->close();
@@ -96,10 +110,10 @@
       $jsonData = '{"results":[';
       $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
       $db_connection->query( "SET NAMES 'UTF8'" );
-      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented FROM houses WHERE owner = ? OR renter = ?");
+      $statement = $db_connection->prepare( "SELECT id, name, description, place, street, number, owner, renter, house_folder, rented, rooms, bathrooms, squaremeters, floor, orientation, type,extras FROM houses WHERE owner = ? OR renter = ?");
       $statement->bind_param( 'ss', $user, $user);
       $statement->execute();
-      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented);
+      $statement->bind_result($id, $name, $description, $place, $street, $number,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras);
       $line = new stdClass;
       while ($statement->fetch()) {
         $line->id = $id;
@@ -112,6 +126,13 @@
         $line->renter = $renter;
         $line->houseFolder = self::directoryFilesArray($houseFolder);
         $line->rented = $rented;
+        $line->rooms = $rooms;
+        $line->bathrooms = $bathrooms;
+        $line->squaremeters = $squaremeters;
+        $line->floor = $floor;
+        $line->orientation = $orientation;
+        $line->type = $type;
+        $line->extras = $extras;
         $arr[] = json_encode($line);
       }
       $statement->close();

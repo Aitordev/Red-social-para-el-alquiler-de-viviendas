@@ -9,7 +9,7 @@
 		$houseName = strip_tags($_POST['name']);
 		$description = strip_tags($_POST['description']);
 		$place = strip_tags($_POST['place']);
-		$street = strip_tags($_POST['description']);
+		$street = strip_tags($_POST['street']);
 		$number = strip_tags($_POST['number']);
 		$owner = "Sin dueño asignado";
 		$renter = "";
@@ -19,6 +19,7 @@
 		$floor = strip_tags($_POST['floor']);
 		$orientation = strip_tags($_POST['orientation']);
 		$type = strip_tags($_POST['type']);
+		$extras = strip_tags($_POST['extras']);
 
 		$rented = 0;
 		if(isset($_POST['rented']) &&	$_POST['rented'] == 'rented') {
@@ -67,7 +68,7 @@
 			}
 		}
 		echo "alert('$houseName'); ";
-		$data = sosialClass::setNewHouse( $houseName,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented);
+		$data = sosialClass::setNewHouse( $houseName,$description,$place,$street,$number,$owner,$renter,$houseFolder,$rented,$rooms,$bathrooms,$squaremeters,$floor,$orientation,$type,$extras);
 	}
 	echo "location.href='$location'; ";
 	echo '</script>';

@@ -41,8 +41,9 @@ CREATE TABLE `houses` (
   `floor` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `orientation` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `type` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `extras` varchar(450) COLLATE utf8_unicode_ci DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +52,7 @@ CREATE TABLE `houses` (
 
 LOCK TABLES `houses` WRITE;
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
-INSERT INTO `houses` VALUES (3,'LA CASAA','Were larger boats and ships that were built in ancient Kalinga kingdom during the heyday of the empi','Boadilla del monte','Francisco Alonso','2','fmartinezros','','yzzlnzmy',0,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `houses` VALUES (3,'LA CASAA','Were larger boats and ships that were built in ancient Kalinga kingdom during the heyday of the empi','Boadilla del monte','Francisco Alonso','2','fmartinezros','','yzzlnzmy',0,'','','','','','',''),(4,'Casa du Paco','La buena casa de Paco','Albacete','Quijote','2','fmartinezros','','nzzlnzmyyw',0,'15','28','500','0','Sur','Chalet','Armarios;Ascensor;Calefacción;Cocina Equipada;Electrodomésticos;Gres Cerámica;Horno;Lavadora;Microondas;Nevera;Parquet;Puerta Blindada;Terraza;Trastero;Videoportero;Dildo;Masajeador'),(5,'asd','','Toledo','','','fmartinezros','','yznhzjczwr',0,'','','','','','','');
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,4 +115,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-27 13:52:40
+-- Dump completed on 2017-03-28 13:42:44

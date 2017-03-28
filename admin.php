@@ -67,7 +67,7 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 											<form method="post" action="addHouse.php" class="admin" enctype="multipart/form-data">
 												<input name="name" type="text" maxlength="25" placeholder="Nombre de la casa" required autofocus>
 												<input name="rooms" type="number" maxlength="2" placeholder="Numero de habitaciones (opcional)" autofocus>
-												<input name="bathrooms" type="number" maxlength="2" placeholder="Numero de baños (opcional)" autofocus>												<input name="rooms" type="number" maxlength="2" placeholder="Numero de habitaciones (opcional)" autofocus>
+												<input name="bathrooms" type="number" maxlength="2" placeholder="Numero de baños (opcional)" autofocus>
 												<input name="squaremeters" type="number" maxlength="3" placeholder="Metros cuadrados (opcional)" autofocus>
 												<input name="floor" type="number" maxlength="2" placeholder="Numero de planta (opcional)" autofocus>
 												<select name="orientation" autofocus>
@@ -89,6 +89,7 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 												<input name="place" type="text" placeholder="Lugar" maxlength="100"required autofocus>
 												<input name="street" type="text" placeholder="Calle (opcional)"  maxlength="100" autofocus>
 												<input name="number" type="text" placeholder="Numero (opcional)" maxlength="100" autofocus>
+												<input name="extras" type="text" placeholder="Extras, separados por ; (opcional)" maxlength="200" autofocus>
 												<legend>¿Quien eres?</legend>
 											  <label class="radio-inline"><input type="radio" name="user" value="0"/>Dueño</label>
 											  <label class="radio-inline"><input type="radio" name="user" value="1"/>Inquilino</label>

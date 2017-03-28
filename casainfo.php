@@ -60,10 +60,15 @@ $line = sosialClass::getSearchId($id);
 							<div id ="headerHouse">
 								<h1 id ="nameHouse"><?php echo $line->name ?></h1>
 								<div class = "subtittle">
-									<h4><i class="fa fa-bed" aria-hidden="true"></i> 2 habitaciones</h4>
-									<h4><i class="fa fa-bath" aria-hidden="true"></i> 2 baños</h4>
-									<h4><i class="fa fa-map-o" aria-hidden="true"></i> 60 m²</h4>
-									<h4><i class="fa fa-building" aria-hidden="true"></i> 1ª planta</h4>
+									<?php if ($line->rooms != ""){?>
+									<h4><i class="fa fa-bed" aria-hidden="true"></i> <?php echo $line->rooms ?> habitaciones</h4>
+									<?php } if ($line->bathrooms != ""){?>
+									<h4><i class="fa fa-bath" aria-hidden="true"></i> <?php echo $line->bathrooms ?> baños</h4>
+									<?php } if ($line->squaremeters != ""){?>
+									<h4><i class="fa fa-map-o" aria-hidden="true"></i> <?php echo $line->squaremeters ?> m²</h4>
+									<?php } if ($line->floor != ""){?>
+									<h4><i class="fa fa-building" aria-hidden="true"></i> <?php echo $line->floor ?>ª planta</h4>
+									<?php } ?>
 								</div>
 							</div>
 							<div id="slides">
@@ -112,9 +117,13 @@ $line = sosialClass::getSearchId($id);
 									<h4>Características</h4>
 								</div>
 								<div class="col-md-8 text-left">
-									<p>Tipo de inmueble : Piso</p>
-									<p>Planta : 1ª planta</p>
-									<p>Orientación : Orientación Sur</p>
+									<?php if ($line->type != ""){?>
+									<p>Tipo de inmueble : <?php echo $line->type ?></p>
+									<?php } if ($line->floor != ""){?>
+									<p>Planta : <?php echo $line->floor ?>ª planta</p>
+									<?php } if ($line->orientation != ""){?>
+									<p>Orientación : Orientación <?php echo $line->orientation ?></p>
+									<?php } ?>
 								</div>
 							</div>
 							<hr />
@@ -124,21 +133,13 @@ $line = sosialClass::getSearchId($id);
 								</div>
 								<div class="col-md-8 text-left">
 									<ul class="detail-extras">
-										<li>Armarios</li>
-										<li>Ascensor</li>
-										<li>Calefacción</li>
-										<li>Cocina Equipada</li>
-										<li>Electrodomésticos</li>
-										<li>Gres Cerámica</li>
-										<li>Horno</li>
-										<li>Lavadora</li>
-										<li>Microondas</li>
-										<li>Nevera</li>
-										<li>Parquet</li>
-										<li>Puerta Blindada</li>
-										<li>Terraza</li>
-										<li>Trastero</li>
-										<li>Videoportero</li>
+										<?php if ($line->extras != ""){
+												$tags = explode(';',$line->extras);
+												foreach($tags as $key) {
+    											echo '<li>'.$key.'</li>';
+												}
+											}
+										?>
 									</ul>
 								</div>
 							</div>
