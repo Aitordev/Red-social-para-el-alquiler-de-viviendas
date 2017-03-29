@@ -15,6 +15,7 @@ $line = sosialClass::getSearchId($id);
 	<title>Red social Viviendas</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/cards.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -56,163 +57,60 @@ $line = sosialClass::getSearchId($id);
 								</ul>
 							</div>
 						<?php } ?>
-	          <div class="col-md-8 col-md-offset-2 centered">
-							<div id ="headerHouse">
-								<h1 id ="nameHouse"><?php echo $line->name ?></h1>
+	          <div class="col-md-9 col-md-offset-1 centered">
+							<div id ="headerUser" class="col-md-3">
+								<img class="circle-img" src="img/placeholder.png" draggable="false"/>
+								<h3 id ="nameUser"><?php echo $line->name ?></h3>
 								<div class = "subtittle">
-									<?php if ($line->rooms != ""){?>
-									<h4><i class="fa fa-bed" aria-hidden="true"></i> <?php echo $line->rooms ?> habitaciones</h4>
-									<?php } if ($line->bathrooms != ""){?>
-									<h4><i class="fa fa-bath" aria-hidden="true"></i> <?php echo $line->bathrooms ?> baños</h4>
-									<?php } if ($line->squaremeters != ""){?>
-									<h4><i class="fa fa-map-o" aria-hidden="true"></i> <?php echo $line->squaremeters ?> m²</h4>
-									<?php } if ($line->floor != ""){?>
-									<h4><i class="fa fa-building" aria-hidden="true"></i> <?php echo $line->floor ?>ª planta</h4>
-									<?php } ?>
-								</div>
-							</div>
-							<div id="slides">
-								<?php	foreach($line->houseFolder as  $clave => $img){?>
-									<img class="wide" src="<?php echo $img ?>">
-								<?php }?>
-							</div>
-							<?php if(isset($_SESSION[ 'username' ]) && ($_SESSION["username"] != "")){?>
-							<hr />
-							<div id="owner"  class="row">
-								<div class="col-md-3">
-									<h4>Dueño</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<p id="ownerHouse"><?php echo $line->owner ?></p>
-								</div>
-							</div>
-							<hr />
-							<div id="valoracion"  class="row">
-								<div class="col-md-3">
-									<h4>Valoración</h4>
-								</div>
-								<div class="col-md-8 text-left">
+									<?php if (isset($_SESSION[ 'username' ]) && ($_SESSION["username"] != "") && ($line->rooms != "")){?>
 									<i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i>
-								</div>
-							</div>
-							<hr />
-							<div id="estado"  class="row">
-								<div class="col-md-3">
-									<h4>Estado</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<p id="rentedHouse">
-										<?php if (1 == $line->rented ){
-											echo 'Alquilado';
-										}else {
-											echo 'Sin alquilar';
-										} ?>
-									</p>
-								</div>
-							</div>
-							<?php } else{?>
-							<hr />
-							<div class="alert alert-warning" role="alert">
-								<h4>Inicia sesion para ver mas información</h4>
-							</div>
-							<?php } ?>
-							<hr />
-							<div id="caracteristicas"  class="row">
-								<div class="col-md-3">
-									<h4>Características</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<?php if ($line->type != ""){?>
-									<p>Tipo de inmueble : <?php echo $line->type ?></p>
-									<?php } if ($line->floor != ""){?>
-									<p>Planta : <?php echo $line->floor ?>ª planta</p>
-									<?php } if ($line->orientation != ""){?>
-									<p>Orientación : Orientación <?php echo $line->orientation ?></p>
 									<?php } ?>
 								</div>
 							</div>
-							<hr />
-							<div id="extras"  class="row">
-								<div class="col-md-3">
-									<h4>Extras</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<ul class="detail-extras">
-										<?php if ($line->extras != ""){
-												$tags = explode(';',$line->extras);
-												foreach($tags as $key) {
-    											echo '<li>'.$key.'</li>';
-												}
-											}
-										?>
-									</ul>
-								</div>
-							</div>
-							<hr />
-							<div id="descripcion"  class="row">
-								<div class="col-md-3">
-									<h4>Descripción</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<p id="descriptionHouse"><?php echo $line->description ?></p>
-								</div>
-							</div>
-							<hr />
-							<div id="adic"  class="row">
-								<div class="col-md-3">
-									<h4>Servicios Adicionales</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<p></p>
-								</div>
-							</div>
-							<hr />
-							<div id="ubicacion"  class="row">
-								<div class="col-md-3">
-									<h4>Ubicación del Inmueble</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<p id="address"><?php echo $line->place ?>, <?php echo $line->street ?> <?php echo $line->number ?></p>
-								</div>
-								<div id="map"></div>
-							</div>
-							<?php if(isset($_SESSION[ 'username' ]) && ($_SESSION["username"] != "")){?>
-							<hr />
-							<div id="history"  class="row">
-								<div class="col-md-3">
-									<h4>Historial de inquilinos</h4>
-								</div>
-								<div class="col-md-8 text-left">
-									<div class="table-responsive">
-										<table class="table table-hover">
-										  <thead>
-										    <tr>
-										     	<th>Usuario</th>
-							            <th>Fecha de entrada</th>
-							            <th>Fecha de salida</th>
-							            <th>Valoración</th>
-							        	</tr>
-										  </thead>
-								    	<tbody>
-												<tr>
-							            <td>Rocky</td>
-							            <td>15-07-2015</td>
-							            <td>05-02-2017</td>
-							            <td><i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i></td>
-							        	</tr>
-								        <tr>
-							            <td>Rocky Jr</td>
-							            <td>11-02-2017</td>
-							            <td>29-05-2019</td>
-							            <td><i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i></td>
-							        	</tr>
-									    </tbody>
-										</table>
+							<div class="col-md-9">
+								<?php if(isset($_SESSION[ 'username' ]) && ($_SESSION["username"] != "")){?>
+								<hr />
+								<div id="owner"  class="row">
+									<div class="col-md-3">
+										<h4>Nombre</h4>
+										<h4>Apellidos</h4>
+										<h4>Telefono</h4>
+										<h4>E-mail</h4>
+										<h4>Provincia</h4>
+										<h4>Edad</h4>
+										<h4>Sexo</h4>
+									</div>
+									<div class="col-md-8 text-left">
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
+										<h4><?php echo $line->owner ?></h4>
 									</div>
 								</div>
-							</div>
-							<?php } ?>
-	          </div><!--/col-md-8 col-md-offset-2 centered-->
+								<hr />
+								<div id="valoracion"  class="row">
+									<div class="col-md-3">
+										<h4>Valoración</h4>
+									</div>
+									<div class="col-md-8 text-left">
+										<i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i><i class="likes"></i>
+									</div>
+								</div>
+								<hr />
+								<h4>Viviendas</h4>
+								<div id = "userHouses">
+									<img id ="loadingHouses" src="img/load.gif" class="img-fluid nodisplay">
+								</div>
+								<?php } else{?>
+								<div class="alert alert-warning margin-top-left" role="alert">
+									<h4>Inicia sesion para ver la información de este usuario</h4>
+								</div>
+								<?php } ?>
+							</div><!--/col-md-9-->
+						</div><!--/col-md-8 col-md-offset-2 centered-->
 	        </div><!--/row-->
 					<div id="mainHouses"></div> <!-- Cards houses div-->
 	      </div><!--/container-->
@@ -251,52 +149,32 @@ $line = sosialClass::getSearchId($id);
 						<input class='btn btn-conf btn-green' type="submit" value="Aceptar">
 					</form>
 			</div>
+			<?php if(isset($_SESSION[ 'username' ]) && ($_SESSION["username"] !== "")){?>
 			<script type="text/javascript">
 		    $(function() {
-		      $('#slides').slidesjs({
-		        width: 940,
-		        height: 328,
-		        play: {
-		          active: true,
-		          auto: true,
-		          interval: 4000,
-		          swap: true
-		        }
-		      });
-		    });
-				function initMap() {
-					setTimeout(function(){
-						map();
-					}, 1200);
-				}
-				function map() {
-				var geocoder = new google.maps.Geocoder();
-				var address = document.getElementById("address").innerHTML;
-				geocoder.geocode( { 'address': address}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						init(results[0].geometry.location.lat(),results[0].geometry.location.lng());
-					} else {
-						console.log('Geocode was not successful for the following reason: ' + status);
-						init(40.416775,-3.703790);
- 					}
+			    var parametros = {
+			      "username" : "<?php echo $_SESSION["username"] ?>"
+			    };
+			    $.ajax({
+			      data:  parametros,
+			      url:   'userHouses.php',
+			      type:  'post',
+			      beforeSend: function () {
+			        $("#loadingHouses").removeClass("nodisplay");
+			      },
+			      success:  function (response) {
+			        $("#loadingHouses").addClass("nodisplay");
+			        $("#userHouses").html(paintCardHouses(response));
+			      },
+			      error: function (jqXHR, exception) {
+			        $("#loadingHouses").addClass("nodisplay");
+			        alert('Error.\n' + jqXHR.responseText);
+			      },
+			    });
 				});
-      	}
-				function init(latitude,longitude) {
-					var loc = new google.maps.LatLng(latitude,longitude);
-					var map = new google.maps.Map(document.getElementById('map'), {
-						zoom: 14,
-						center: loc
-					});
-					var marker = new google.maps.Marker({
-						position: loc,
-						map: map
-					});
-				}
-		  </script>
-			<script async defer
-    	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkEKsDbQ8Myw56o1Pt-UuuhgIew7O2654&callback=initMap">
-    </script>
-</body>
+		</script>
+		<?php } ?>
+	</body>
 </html>
 <!--
 REQUISITOS

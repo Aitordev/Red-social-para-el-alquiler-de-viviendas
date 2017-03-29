@@ -23,49 +23,6 @@ $(document).ready(function() {
     })(img);
     reader.readAsDataURL(file);
   }
-  function paintCardHouses(json){
-    var html= '<div class="cards">';
-    console.log(json);
-    $.each($.parseJSON(json).results, function(k, v) {
-      html+='<article class="card card_size-m">'
-          +    '<header class="card__header">'
-          +      '<img class="card__preview" src="'+v.houseFolder[0]+'" alt="Preview img">'
-          +    '</header>'
-          +      '<div class="card__body">'
-          +         '<div class="card__content">'
-          +         '<h3 class="card__title"><a href="casainfo.php?id='+v.id+'"target="_blank" class="card__showmore">'+ v.name +'</a></h3>'
-          +         '<div class="card__description">'
-          +           '<p>'+v.description.substr(0,21) +'...</p>'
-          +           '<p>'+v.place +'. '+ v.street+', '+ v.number +'</p>'
-          +         '</div>'
-          +      '</div>'
-          +      '<footer class="card__footer">';
-      if ("" !== v.user){
-        if (1 === v.rented){
-          html+=     '<span class="card__author">Alquilado</span>';
-        }
-        else{
-          html+=     '<span class="card__author">Sin alquilar</span>';
-        }
-      }
-      else{
-        html+=     '<span class="card__author"></span>';
-      }
-      html+=        '<div class="card__meta">'
-          +           '<div class="card__meta-item">'
-          +             '<i class="card__meta-icon card__meta-likes"></i>'
-          +             '<i class="card__meta-icon card__meta-likes"></i>'
-          +             '<i class="card__meta-icon card__meta-likes"></i>'
-          +             '<i class="card__meta-icon card__meta-likes"></i>'
-          +           '</div>'
-          +         '</div>'
-          +       '</footer>'
-          +     '</div>'
-          + '</article>';
-    });
-    html += '</div>';
-    return html;
-  }
   function searchMyHousesOnServer(){
     var parametros = {
       "submit" : "1"
@@ -216,3 +173,47 @@ $(document).ready(function() {
     }
   });
 });
+
+function paintCardHouses(json){
+  var html= '<div class="cards">';
+  console.log(json);
+  $.each($.parseJSON(json).results, function(k, v) {
+    html+='<article class="card card_size-m">'
+        +    '<header class="card__header">'
+        +      '<img class="card__preview" src="'+v.houseFolder[0]+'" alt="Preview img">'
+        +    '</header>'
+        +      '<div class="card__body">'
+        +         '<div class="card__content">'
+        +         '<h3 class="card__title"><a href="casainfo.php?id='+v.id+'"target="_blank" class="card__showmore">'+ v.name +'</a></h3>'
+        +         '<div class="card__description">'
+        +           '<p>'+v.description.substr(0,21) +'...</p>'
+        +           '<p>'+v.place +'. '+ v.street+', '+ v.number +'</p>'
+        +         '</div>'
+        +      '</div>'
+        +      '<footer class="card__footer">';
+    if ("" !== v.user){
+      if (1 === v.rented){
+        html+=     '<span class="card__author">Alquilado</span>';
+      }
+      else{
+        html+=     '<span class="card__author">Sin alquilar</span>';
+      }
+    }
+    else{
+      html+=     '<span class="card__author"></span>';
+    }
+    html+=        '<div class="card__meta">'
+        +           '<div class="card__meta-item">'
+        +             '<i class="card__meta-icon card__meta-likes"></i>'
+        +             '<i class="card__meta-icon card__meta-likes"></i>'
+        +             '<i class="card__meta-icon card__meta-likes"></i>'
+        +             '<i class="card__meta-icon card__meta-likes"></i>'
+        +           '</div>'
+        +         '</div>'
+        +       '</footer>'
+        +     '</div>'
+        + '</article>';
+  });
+  html += '</div>';
+  return html;
+}
