@@ -25,6 +25,24 @@
       $db_connection->close();
     }
 
+    public static function removeHouse( $id) {
+      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
+      $db_connection->query( "SET NAMES 'UTF8'" );
+      $statement = $db_connection->prepare( "DELETE FROM houses WHERE id = ?");
+      $statement->bind_param( 'i', $id);
+      $statement->execute();
+      $statement->close();
+      $db_connection->close();
+    }
+    public static function removeUser( $id) {
+      $db_connection = new mysqli( mysqlServer, mysqlUser, mysqlPass, mysqlDB);
+      $db_connection->query( "SET NAMES 'UTF8'" );
+      $statement = $db_connection->prepare( "DELETE FROM users WHERE id = ?");
+      $statement->bind_param( 'i', $id);
+      $statement->execute();
+      $statement->close();
+      $db_connection->close();
+    }
     public static function getSearchOf($place, $street, $number,$user) {
       $arr = array();
       $jsonData = '{"results":[';

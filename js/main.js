@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  var currenthouseremove = 0;
   function validatePassword(){
     if(password.value != confirm_password.value) {
       confirm_password.setCustomValidity("Passwords Don't Match");
@@ -36,7 +37,24 @@ $(document).ready(function() {
       },
       success:  function (response) {
         $("#loadingHouses").addClass("nodisplay");
-        $("#userHouses").html(paintCardHouses(response));
+        $("#userHouses").html(paintCardHouses(response,true));
+        $(".removehouse").click(function () {
+          $("#confirmremove, #modal-background").toggleClass("active");
+          currenthouseremove = this.dataset.houseid;
+        });
+        $(".edithouse").click(function () {
+          $("#newB").click();
+          $('#nuevacasa').html("Editar Casa");
+          $('input[name=name]').val(this.dataset.name);
+          $('input[name=description]').val(this.dataset.description);
+          $('input[name=place]').val(this.dataset.place);
+          $('input[name=street]').val(this.dataset.street);
+          $('input[name=rooms]').val(this.dataset.rooms);
+          $('input[name=squaremeters]').val(this.dataset.squaremeters);
+          $('input[name=type]').val(this.dataset.type);
+          $('input[name=extras]').val(this.dataset.extras);
+          $('input[name=floor]').val(this.dataset.floor);
+        });
       },
       error: function (jqXHR, exception) {
         $("#loadingHouses").addClass("nodisplay");
@@ -78,6 +96,9 @@ $(document).ready(function() {
     else if ($("#register").hasClass("active")){
         $("#register").toggleClass("active");
     }
+    else if ($("#confirmremove").hasClass("active")){
+      $("#confirmremove").toggleClass("active");
+    }
     $("#modal-background").toggleClass("active");
   });
   $("#registerB, #registerL").click(function () {
@@ -86,6 +107,7 @@ $(document).ready(function() {
   $("#loginB, #loginL").click(function () {
       $("#login, #modal-background").toggleClass("active");
   });
+
   $("#admin").click(function () {
       window.location.href= "admin.php";
   });
@@ -130,7 +152,7 @@ $(document).ready(function() {
         $( ".logo, #title, #free, #loginB, #registerB, #sep, #green" ).addClass("nodisplay");
         $( "#menu" ).removeClass("nodisplay");
         console.log(response);
-        $("#mainHouses").html(paintCardHouses(response));
+        $("#mainHouses").html(paintCardHouses(response,false));
       });
       // Callback handler that will be called on failure
       request.fail(function (jqXHR, textStatus, errorThrown){
@@ -153,16 +175,25 @@ $(document).ready(function() {
       $("#houses").removeClass("nodisplay");
       $("#new").addClass("nodisplay");
       $("#sol").addClass("nodisplay");
+      $("#ajustes").addClass("nodisplay");
   });
   $("#newB").click(function () {
       $("#new").removeClass("nodisplay");
       $("#houses").addClass("nodisplay");
       $("#sol").addClass("nodisplay");
+      $("#ajustes").addClass("nodisplay");
   });
   $("#solB").click(function () {
       $("#sol").removeClass("nodisplay");
       $("#new").addClass("nodisplay");
       $("#houses").addClass("nodisplay");
+      $("#ajustes").addClass("nodisplay");
+  });
+  $("#ajustesB").click(function () {
+      $("#ajustes").removeClass("nodisplay");
+      $("#new").addClass("nodisplay");
+      $("#houses").addClass("nodisplay");
+      $("#sol").addClass("nodisplay");
   });
   $('input[name=rented]').change(function(){
     if($(this).is(':checked')){
@@ -172,9 +203,48 @@ $(document).ready(function() {
       $('#userlist').addClass('nodisplay');
     }
   });
+  $("#confirmremove").click(function () {
+    removehouseserver(currenthouseremove);
+    searchMyHousesOnServer();
+    $("#confirmremove, #modal-background").toggleClass("active");
+  });
+  $("#removeuser").click(function () {
+    removeuserserver(currenthouseremove);
+    $("#home").click();
+    alert("Usuario eliminado")
+  });
 });
 
-function paintCardHouses(json){
+function removehouseserver(id){
+  var parametros = {
+    "id" : id
+  };
+  $.ajax({
+    data:  parametros,
+    url:   'removeHouses.php',
+    type:  'post',
+    success:  function (response) {
+      $("#userHouses").html("");
+    },
+  });
+}
+
+function removeuserserver(id){
+  var parametros = {
+    "id" : id
+  };
+  $.ajax({
+    data:  parametros,
+    url:   'removeUser.php',
+    type:  'post',
+    success:  function (response) {
+      //$("#userHouses").html("");
+      alert("Usuario eliminado");
+    },
+  });
+}
+
+function paintCardHouses(json, edit){
   var html= '<div class="cards">';
   console.log(json);
   $.each($.parseJSON(json).results, function(k, v) {
@@ -184,7 +254,13 @@ function paintCardHouses(json){
         +    '</header>'
         +      '<div class="card__body">'
         +         '<div class="card__content">'
-        +         '<h3 class="card__title"><a href="casainfo.php?id='+v.id+'"target="_blank" class="card__showmore">'+ v.name +'</a></h3>'
+        +         '<h3 class="card__title">'
+        +           '<a href="casainfo.php?id='+v.id+'"target="_blank" class="card__showmore">'+ v.name +'</a>';
+    if (edit){
+      html+=          '<button class="removehouse btn-card glyphicon glyphicon-trash" data-houseid="'+v.id+'"></button>'
+          +           '<button class="edithouse btn-card glyphicon glyphicon-pencil" data-name="'+v.name+'" data-description="'+v.description+'" data-place="'+v.place+'" data-street="'+v.street+'" data-rooms="'+v.rooms+'" data-squaremeters="'+v.squaremeters+'" data-type="'+v.type+'" data-extras="'+v.extras+'" data-floor="'+v.floor+'"></button>';
+    }
+    html+=         '</h3>'
         +         '<div class="card__description">'
         +           '<p>'+v.description.substr(0,21) +'...</p>'
         +           '<p>'+v.place +'. '+ v.street+', '+ v.number +'</p>'

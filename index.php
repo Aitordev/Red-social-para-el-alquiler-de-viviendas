@@ -21,7 +21,7 @@ session_start();
 	        <div class="row">
 						<?php if(!isset($_SESSION[ 'username' ]) || ($_SESSION["username"] == "")){?>
 							<button id="loginB" class="btn btn-conf-2 btn-green">Login</button>
-							<button id="registerB" class="btn btn-conf-2 btn-green">Registro</button>
+							<button id="registerB" class="btn btn-conf-2 btn-green" style="margin-right:6%;">Registro</button>
 							<div id ="menu" class="menu dropdown nodisplay">
 								<a id="tittle" href="index.php"><h1>Red Social Viviendas</h1></a>
 								<a id="userB" class="dropdown-toggle" data-toggle="dropdown">

@@ -159,6 +159,16 @@ input, select {
 	background: #03acc9;
 	color: white
 }
+.btn-card {
+	background: none;
+	border: none;
+	color: #ccc;
+	float: right;
+}
+
+.btn-card:hover{
+	color:black;
+}
 
 /* HEADER SECTION */
 #h {

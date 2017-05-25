@@ -24,7 +24,7 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 			<div id="sidebar-wrapper">
 					<ul class="sidebar-nav">
 							<li class="sidebar-brand">
-									<a href="index.php">Red Social Viviendas</a>
+									<a id="home" href="index.php">Red Social Viviendas</a>
 							</li>
 							<li>
 									<a id="housesB" href="#">Mis viviendas</a>
@@ -34,6 +34,9 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 							</li>
 							<li>
 									<a id="solB" href="#">Solicitudes</a>
+							</li>
+							<li>
+									<a id="ajustesB" href="#">Ajustes</a>
 							</li>
 					</ul>
 			</div>
@@ -63,7 +66,7 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 											</div>
 									</div>
 									<div id = "new" class="col-lg-12 paddingtop15 nodisplay">
-											<h1>Nueva Casa</h1>
+											<h1 id="nuevacasa">Nueva Casa</h1>
 											<form method="post" action="addHouse.php" class="admin" enctype="multipart/form-data">
 												<input name="name" type="text" maxlength="25" placeholder="Nombre de la casa" required autofocus>
 												<input name="rooms" type="number" maxlength="2" placeholder="Numero de habitaciones (opcional)" autofocus>
@@ -104,12 +107,38 @@ if (!isset($_SESSION[ 'username' ]) || $_SESSION[ 'username' ] === null  || $_SE
 									<div id = "sol" class="col-lg-12 paddingtop15 nodisplay">
 											<h1>Solicitudes</h1>
 									</div>
+									<div id = "ajustes" class="col-lg-12 paddingtop15 nodisplay">
+											<h1>Ajustes de Usuario</h1>
+											<form method="post" action="addHouse.php" class="admin" enctype="multipart/form-data">
+												<input name="name" type="text" maxlength="25" placeholder="Nombre" required autofocus>
+												<input name="surname" type="text" maxlength="25" placeholder="Apellidos" required autofocus>
+												<input name="provincia" type="text" maxlength="2" placeholder="Provincia" autofocus>
+												<input name="old" type="number" maxlength="2" placeholder="Edad" autofocus>
+												<select name="orientation" autofocus>
+													<option value="" selected="selected">Selecciona sexo</option>
+											    <option value="Norte">Masculino</option>
+											    <option value="Sur">Femenino</option>
+											    <option value="Este">Otro</option>
+											  </select>
+
+												<input class='btn btn-conf btn-green pull-right' type="submit" name="submit" value="Aceptar">
+											</form>
+											<h2>Eliminar Usuario</h2>
+											<button id="removeUser" class='btn btn-conf btn-green'>Eliminar</button>
+									</div>
 							</div>
 					</div>
 			</div>
 			<!-- /#page-content-wrapper -->
 	</div>
 	<!-- /#wrapper -->
+	<!-- confim Modals-->
+	<div id="modal-background"></div>
+
+	<div id="confirmremove" class ="modal-content">
+			<h3>Estas seguro de Eliminar?</h3>
+			<button class='btn btn-conf btn-green' style="float: right;">Aceptar</button>
+	</div>
 </body>
 </html>
 
